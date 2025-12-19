@@ -15,61 +15,63 @@ const clients = [
 export default function Clientes() {
   return (
     <DashboardLayout>
-      <div className="p-6 space-y-6">
+      <div className="p-4 md:p-6 space-y-4 md:space-y-6">
         <div>
-          <h1 className="text-2xl font-bold text-foreground">Clientes</h1>
-          <p className="text-muted-foreground">Gestão completa de usuários da plataforma</p>
+          <h1 className="text-xl md:text-2xl font-bold text-foreground">Clientes</h1>
+          <p className="text-sm md:text-base text-muted-foreground">Gestão completa de usuários da plataforma</p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4">
           <MetricCard
             title="Total de Clientes Cadastrados"
             value="2.847"
-            icon={<Users className="w-6 h-6 text-primary" />}
+            icon={<Users className="w-5 h-5 md:w-6 md:h-6 text-primary" />}
             iconBgColor="bg-primary/10"
           />
           <MetricCard
             title="Novos Clientes (30 dias)"
             value="156"
-            icon={<UserPlus className="w-6 h-6 text-success" />}
+            icon={<UserPlus className="w-5 h-5 md:w-6 md:h-6 text-success" />}
             iconBgColor="bg-success/10"
             trend={{ value: "↑ 23.4%", isPositive: true }}
           />
           <MetricCard
             title="Clientes Ativos"
             value="1.892"
-            icon={<UserCheck className="w-6 h-6 text-success" />}
+            icon={<UserCheck className="w-5 h-5 md:w-6 md:h-6 text-success" />}
             iconBgColor="bg-success/10"
           />
           <MetricCard
             title="Taxa de Conversão"
             value="4.8%"
-            icon={<TrendingUp className="w-6 h-6 text-primary" />}
+            icon={<TrendingUp className="w-5 h-5 md:w-6 md:h-6 text-primary" />}
             iconBgColor="bg-primary/10"
             trend={{ value: "↑ 0.5%", isPositive: true }}
           />
         </div>
 
         {/* Filters */}
-        <div className="flex flex-wrap items-center gap-3 p-4 bg-card rounded-xl border border-border/50">
-          <div className="relative flex-1 min-w-[200px]">
+        <div className="flex flex-col sm:flex-row flex-wrap items-stretch sm:items-center gap-2 sm:gap-3 p-3 md:p-4 bg-card rounded-xl border border-border/50">
+          <div className="relative flex-1 min-w-0 sm:min-w-[200px]">
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
             <input type="text" placeholder="Buscar por nome, email ou ID" className="filter-input w-full pl-10" />
           </div>
-          <select className="filter-input">
-            <option value="">Status</option>
-            <option value="ativo">Ativo</option>
-            <option value="inativo">Inativo</option>
-            <option value="bloqueado">Bloqueado</option>
-          </select>
-          <select className="filter-input">
-            <option value="">Tipo de conta</option>
-            <option value="pf">Pessoa Física</option>
-            <option value="loja">Loja</option>
-          </select>
-          <input type="date" className="filter-input" />
-          <input type="text" placeholder="Cidade/Estado" className="filter-input" />
-          <Button>Filtrar</Button>
+          <div className="grid grid-cols-2 sm:flex gap-2 sm:gap-3">
+            <select className="filter-input">
+              <option value="">Status</option>
+              <option value="ativo">Ativo</option>
+              <option value="inativo">Inativo</option>
+              <option value="bloqueado">Bloqueado</option>
+            </select>
+            <select className="filter-input">
+              <option value="">Tipo</option>
+              <option value="pf">Pessoa Física</option>
+              <option value="loja">Loja</option>
+            </select>
+            <input type="date" className="filter-input" />
+            <input type="text" placeholder="Cidade/Estado" className="filter-input" />
+          </div>
+          <Button className="w-full sm:w-auto">Filtrar</Button>
         </div>
 
         {/* Table */}
@@ -78,14 +80,14 @@ export default function Clientes() {
             <table className="data-table">
               <thead>
                 <tr>
-                  <th>ID</th>
+                  <th className="hidden sm:table-cell">ID</th>
                   <th>Nome</th>
-                  <th>Email</th>
-                  <th>Telefone</th>
-                  <th>Tipo</th>
-                  <th>Anúncios Ativos</th>
-                  <th>Trocas Realizadas</th>
-                  <th>Data Cadastro</th>
+                  <th className="hidden md:table-cell">Email</th>
+                  <th className="hidden lg:table-cell">Telefone</th>
+                  <th className="hidden sm:table-cell">Tipo</th>
+                  <th className="hidden lg:table-cell">Anúncios</th>
+                  <th className="hidden lg:table-cell">Trocas</th>
+                  <th className="hidden md:table-cell">Data</th>
                   <th>Status</th>
                   <th>Ações</th>
                 </tr>
@@ -93,20 +95,25 @@ export default function Clientes() {
               <tbody>
                 {clients.map((client) => (
                   <tr key={client.id}>
-                    <td className="font-medium">{client.id}</td>
-                    <td>{client.name}</td>
-                    <td className="text-muted-foreground">{client.email}</td>
-                    <td className="text-muted-foreground">{client.phone}</td>
+                    <td className="hidden sm:table-cell font-medium">{client.id}</td>
                     <td>
+                      <div>
+                        <span className="block">{client.name}</span>
+                        <span className="block sm:hidden text-xs text-muted-foreground">{client.email}</span>
+                      </div>
+                    </td>
+                    <td className="hidden md:table-cell text-muted-foreground">{client.email}</td>
+                    <td className="hidden lg:table-cell text-muted-foreground">{client.phone}</td>
+                    <td className="hidden sm:table-cell">
                       <span className={`status-badge ${client.type === "Loja" ? "status-badge-primary" : "bg-muted text-muted-foreground"}`}>
                         {client.type}
                       </span>
                     </td>
-                    <td className="text-center">{client.ads}</td>
-                    <td className="text-center">{client.trades}</td>
-                    <td className="text-muted-foreground">{client.date}</td>
+                    <td className="hidden lg:table-cell text-center">{client.ads}</td>
+                    <td className="hidden lg:table-cell text-center">{client.trades}</td>
+                    <td className="hidden md:table-cell text-muted-foreground">{client.date}</td>
                     <td>
-                      <span className={`status-badge ${
+                      <span className={`status-badge text-xs ${
                         client.status === "Ativo" ? "status-badge-success" :
                         client.status === "Bloqueado" ? "status-badge-destructive" : "status-badge-warning"
                       }`}>
@@ -114,12 +121,12 @@ export default function Clientes() {
                       </span>
                     </td>
                     <td>
-                      <div className="flex items-center gap-1">
-                        <button className="p-1.5 hover:bg-muted rounded-lg" title="Ver perfil"><Eye className="w-4 h-4 text-muted-foreground" /></button>
-                        <button className="p-1.5 hover:bg-muted rounded-lg" title="Editar"><Edit className="w-4 h-4 text-muted-foreground" /></button>
-                        <button className="p-1.5 hover:bg-muted rounded-lg" title="Bloquear"><Ban className="w-4 h-4 text-muted-foreground" /></button>
-                        <button className="p-1.5 hover:bg-muted rounded-lg" title="Histórico"><History className="w-4 h-4 text-muted-foreground" /></button>
-                        <button className="p-1.5 hover:bg-muted rounded-lg" title="Mensagem"><MessageSquare className="w-4 h-4 text-muted-foreground" /></button>
+                      <div className="flex items-center gap-0.5 md:gap-1">
+                        <button className="p-1 md:p-1.5 hover:bg-muted rounded-lg" title="Ver perfil"><Eye className="w-4 h-4 text-muted-foreground" /></button>
+                        <button className="p-1 md:p-1.5 hover:bg-muted rounded-lg hidden sm:block" title="Editar"><Edit className="w-4 h-4 text-muted-foreground" /></button>
+                        <button className="p-1 md:p-1.5 hover:bg-muted rounded-lg hidden sm:block" title="Bloquear"><Ban className="w-4 h-4 text-muted-foreground" /></button>
+                        <button className="p-1 md:p-1.5 hover:bg-muted rounded-lg hidden md:block" title="Histórico"><History className="w-4 h-4 text-muted-foreground" /></button>
+                        <button className="p-1 md:p-1.5 hover:bg-muted rounded-lg hidden md:block" title="Mensagem"><MessageSquare className="w-4 h-4 text-muted-foreground" /></button>
                       </div>
                     </td>
                   </tr>
@@ -127,14 +134,14 @@ export default function Clientes() {
               </tbody>
             </table>
           </div>
-          <div className="px-6 py-4 border-t border-border/50 flex items-center justify-between">
-            <p className="text-sm text-muted-foreground">Mostrando 1-6 de 2.847 clientes</p>
-            <div className="flex items-center gap-2">
-              <button className="px-3 py-1.5 text-sm border border-border rounded-lg hover:bg-muted">Anterior</button>
-              <button className="px-3 py-1.5 text-sm bg-primary text-primary-foreground rounded-lg">1</button>
-              <button className="px-3 py-1.5 text-sm border border-border rounded-lg hover:bg-muted">2</button>
-              <button className="px-3 py-1.5 text-sm border border-border rounded-lg hover:bg-muted">3</button>
-              <button className="px-3 py-1.5 text-sm border border-border rounded-lg hover:bg-muted">Próximo</button>
+          <div className="px-4 md:px-6 py-3 md:py-4 border-t border-border/50 flex flex-col sm:flex-row items-center justify-between gap-3">
+            <p className="text-xs sm:text-sm text-muted-foreground">Mostrando 1-6 de 2.847 clientes</p>
+            <div className="flex items-center gap-1 md:gap-2">
+              <button className="px-2 md:px-3 py-1 md:py-1.5 text-xs md:text-sm border border-border rounded-lg hover:bg-muted">Anterior</button>
+              <button className="px-2 md:px-3 py-1 md:py-1.5 text-xs md:text-sm bg-primary text-primary-foreground rounded-lg">1</button>
+              <button className="px-2 md:px-3 py-1 md:py-1.5 text-xs md:text-sm border border-border rounded-lg hover:bg-muted">2</button>
+              <button className="px-2 md:px-3 py-1 md:py-1.5 text-xs md:text-sm border border-border rounded-lg hover:bg-muted hidden sm:block">3</button>
+              <button className="px-2 md:px-3 py-1 md:py-1.5 text-xs md:text-sm border border-border rounded-lg hover:bg-muted">Próximo</button>
             </div>
           </div>
         </div>
