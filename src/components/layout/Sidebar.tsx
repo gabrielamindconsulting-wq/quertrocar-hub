@@ -42,7 +42,7 @@ export function Sidebar() {
     <>
       {/* Mobile Header */}
       <div className="lg:hidden fixed top-0 left-0 right-0 z-50 bg-sidebar px-4 py-3 flex items-center justify-between border-b border-sidebar-border">
-        <img src={logoQuertrocar} alt="Quertrocar" className="h-8 w-auto" />
+        <img src={logoQuertrocar} alt="Quertrocar" className="h-6 w-auto" />
         <button
           onClick={() => setIsOpen(!isOpen)}
           className="p-2 rounded-lg hover:bg-sidebar-accent text-sidebar-foreground"
@@ -68,8 +68,8 @@ export function Sidebar() {
         )}
       >
         {/* Logo */}
-        <div className="px-4 py-6 border-b border-sidebar-border">
-          <img src={logoQuertrocar} alt="Quertrocar" className="h-10 w-auto" />
+        <div className="px-4 py-5 border-b border-sidebar-border">
+          <img src={logoQuertrocar} alt="Quertrocar" className="h-7 w-auto" />
           <p className="text-xs text-sidebar-muted mt-1">Dashboard Gerencial</p>
         </div>
 
