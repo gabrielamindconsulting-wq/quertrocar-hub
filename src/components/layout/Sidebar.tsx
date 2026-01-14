@@ -17,6 +17,7 @@ import {
 } from "lucide-react";
 import { useState } from "react";
 import { cn } from "@/lib/utils";
+import logoQuertrocar from "@/assets/logo-quertrocar.svg";
 
 const menuItems = [
   { icon: LayoutGrid, label: "Dashboard", path: "/" },
@@ -41,12 +42,7 @@ export function Sidebar() {
     <>
       {/* Mobile Header */}
       <div className="lg:hidden fixed top-0 left-0 right-0 z-50 bg-sidebar px-4 py-3 flex items-center justify-between border-b border-sidebar-border">
-        <div className="flex items-center gap-3">
-          <div className="w-8 h-8 rounded-lg bg-primary flex items-center justify-center">
-            <ArrowLeftRight className="w-4 h-4 text-primary-foreground" />
-          </div>
-          <span className="text-sm font-bold text-sidebar-foreground">Quertrocar</span>
-        </div>
+        <img src={logoQuertrocar} alt="Quertrocar" className="h-8 w-auto" />
         <button
           onClick={() => setIsOpen(!isOpen)}
           className="p-2 rounded-lg hover:bg-sidebar-accent text-sidebar-foreground"
@@ -72,16 +68,9 @@ export function Sidebar() {
         )}
       >
         {/* Logo */}
-        <div className="px-6 py-6 border-b border-sidebar-border">
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-primary flex items-center justify-center">
-              <ArrowLeftRight className="w-5 h-5 text-primary-foreground" />
-            </div>
-            <div>
-              <h1 className="text-lg font-bold text-sidebar-foreground">Quertrocar</h1>
-              <p className="text-xs text-sidebar-muted">Dashboard Gerencial</p>
-            </div>
-          </div>
+        <div className="px-4 py-6 border-b border-sidebar-border">
+          <img src={logoQuertrocar} alt="Quertrocar" className="h-10 w-auto" />
+          <p className="text-xs text-sidebar-muted mt-1">Dashboard Gerencial</p>
         </div>
 
         {/* Navigation */}
